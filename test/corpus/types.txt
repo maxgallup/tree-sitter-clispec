@@ -1,0 +1,49 @@
+================================================================================
+Basic Unit Type
+================================================================================
+type MyType {}
+--------------------------------------------------------------------------------
+(source_file
+    (type_declaration
+    type_id: (identifier)))
+
+================================================================================
+Basic Enum Type
+================================================================================
+type MyType {
+    Variant1,
+    Variant2,
+}
+--------------------------------------------------------------------------------
+(source_file
+    (type_declaration
+        type_id: (identifier)
+        (type_data_declaration
+            (variant_field_declaration
+                variant_id: (identifier)))
+        (type_data_declaration
+            (variant_field_declaration
+                variant_id: (identifier)))))
+
+================================================================================
+Basic Enum Type with a field
+================================================================================
+type MyType {
+    name: String,
+    Variant1,
+    Variant2,
+}
+--------------------------------------------------------------------------------
+(source_file
+    (type_declaration
+    type_id: (identifier)
+    (type_data_declaration
+        (type_field_declaration
+        field_expression: (optional_type_name
+            type_id: (identifier))))
+    (type_data_declaration
+        (variant_field_declaration
+        variant_id: (identifier)))
+    (type_data_declaration
+        (variant_field_declaration
+        variant_id: (identifier)))))
