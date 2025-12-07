@@ -113,9 +113,6 @@ module.exports = grammar({
 
     _parameter_value: ($) => choice($.string_literal, $.none),
 
-    _literal_expression: ($) =>
-      choice($.string_literal, $.int_literal, $.float_literal),
-
     // 420
     int_literal: ($) => token(/\d+/),
 
@@ -133,6 +130,7 @@ module.exports = grammar({
         $.string_literal_union_type,
         $.int_literal_union_type,
         $.float_literal_union_type,
+        $.bool_literal,
       ),
 
     // "K" | "M" | "G" | ...
