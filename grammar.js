@@ -10,7 +10,7 @@
 module.exports = grammar({
   name: "clispec",
 
-  extras: ($) => [/\s/, $.line_comment],
+  extras: ($) => [/\s/, $.line_comment, $.doc_comment],
 
   rules: {
     source_file: ($) => repeat($._declaration),
