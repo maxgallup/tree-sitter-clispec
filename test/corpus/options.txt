@@ -2,79 +2,84 @@
 Basic Option
 ================================================================================
 
-option TestFlag<"a", "all"> = String
+input option TestFlag<"a", "all"> = String
 
 --------------------------------------------------------------------------------
 
 (source_file
+    (input_declaration
     (option_declaration
     argument_id: (identifier)
     parameters: (parameter_list
         short: (string_literal)
         long: (string_literal))
     type: (optional_type_name
-        type_id: (identifier))))
+        type_id: (identifier)))))
 
 ================================================================================
 Option with long None
 ================================================================================
 
-option TestFlag<"a", None> = String
+input option TestFlag<"a", None> = String
 
 --------------------------------------------------------------------------------
 
 (source_file
+    (input_declaration
     (option_declaration
     argument_id: (identifier)
     parameters: (parameter_list
         short: (string_literal)
         long: (none))
     type: (optional_type_name
-        type_id: (identifier))))
+        type_id: (identifier)))))
 
 ================================================================================
 Option with short None
 ================================================================================
 
-option TestFlag<None, "all"> = String
+input option TestFlag<None, "all"> = String
 
 --------------------------------------------------------------------------------
 
 (source_file
+    (input_declaration
     (option_declaration
     argument_id: (identifier)
     parameters: (parameter_list
         short: (none)
         long: (string_literal))
     type: (optional_type_name
-        type_id: (identifier))))
+        type_id: (identifier)))))
 
 ================================================================================
 Option with Optional String
 ================================================================================
 
-option TestFlag<None, "all"> = Int ?
+input option TestFlag<None, "all"> = Int ?
 
 --------------------------------------------------------------------------------
 
 (source_file
+    (input_declaration
     (option_declaration
     argument_id: (identifier)
     parameters: (parameter_list
         short: (none)
         long: (string_literal))
     type: (optional_type_name
-        type_id: (identifier))))
+        type_id: (identifier)))))
 
 ================================================================================
 Option with Optional Literal
 ================================================================================
 
-option TestFlag<None, "all"> = "asdf" ?
+input option TestFlag<None, "all"> = "asdf" ?
 
 --------------------------------------------------------------------------------
 
 (source_file
+    (input_declaration
     (option_declaration
     argument_id: (identifier)
     parameters: (parameter_list
@@ -83,17 +88,18 @@ option TestFlag<None, "all"> = "asdf" ?
     type: (optional_type_name
         (literal_union_type
             (string_literal_union_type
-                (string_literal))))))
+                (string_literal)))))))
 
 ================================================================================
 Option with Optional Literal
 ================================================================================
 
-option TestFlag<None, "all"> = "abc" | "def" ?
+input option TestFlag<None, "all"> = "abc" | "def" ?
 
 --------------------------------------------------------------------------------
 
 (source_file
+    (input_declaration
     (option_declaration
     argument_id: (identifier)
     parameters: (parameter_list
@@ -103,16 +109,17 @@ option TestFlag<None, "all"> = "abc" | "def" ?
         (literal_union_type
             (string_literal_union_type
                 (string_literal)
-                (string_literal))))))
+                (string_literal)))))))
 
 ================================================================================
 Option with Optional Literal and Int Error
 ================================================================================
 
-option TestFlag<None, "all"> = "abc" | 11 ?
+input option TestFlag<None, "all"> = "abc" | 11 ?
 
 --------------------------------------------------------------------------------
     (source_file
+    (input_declaration
       (option_declaration
         (identifier)
         (parameter_list
@@ -123,4 +130,4 @@ option TestFlag<None, "all"> = "abc" | 11 ?
             (string_literal_union_type
               (string_literal)))
           (ERROR
-            (int_literal)))))
+            (int_literal))))))

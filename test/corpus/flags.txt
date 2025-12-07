@@ -2,60 +2,64 @@
 Basic Flag
 ================================================================================
 
-flag TestFlag<"a", "all">
+input flag TestFlag<"a", "all">
 
 --------------------------------------------------------------------------------
 
 (source_file
+(input_declaration
     (flag_declaration
       argument_id: (identifier)
       parameters: (parameter_list
         short: (string_literal)
-        long: (string_literal))))
+        long: (string_literal)))))
 
 ================================================================================
 Flag with long None
 ================================================================================
 
-flag TestFlag<"a", None>
+input flag TestFlag<"a", None>
 
 --------------------------------------------------------------------------------
 
 (source_file
+(input_declaration
     (flag_declaration
       argument_id: (identifier)
       parameters: (parameter_list
         short: (string_literal)
-        long: (none))))
+        long: (none)))))
 
 ================================================================================
 Flag with short None
 ================================================================================
 
-flag TestFlag<None, "all">
+input flag TestFlag<None, "all">
 
 --------------------------------------------------------------------------------
 
 (source_file
+(input_declaration
     (flag_declaration
       argument_id: (identifier)
       parameters: (parameter_list
         short: (none)
-        long: (string_literal))))
+        long: (string_literal)))))
 
 ================================================================================
 Flag with required Basic
 ================================================================================
 
-flag TestFlag<None, "all"> requires Bingo
+input flag TestFlag<None, "all"> requires Bingo
 
 --------------------------------------------------------------------------------
 
 (source_file
+    (input_declaration
     (flag_declaration
       argument_id: (identifier)
       parameters: (parameter_list
         short: (none)
         long: (string_literal))
       requires: (requires_clause
-        argument_id: (identifier))))
+        argument_id: (identifier)))))

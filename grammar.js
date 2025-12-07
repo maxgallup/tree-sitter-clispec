@@ -16,11 +16,12 @@ module.exports = grammar({
     source_file: ($) => repeat($._declaration),
 
     _declaration: ($) =>
-      choice(
-        $.flag_declaration,
-        $.type_declaration,
-        $.option_declaration,
-        $.alias_declaration,
+      choice($.type_declaration, $.alias_declaration, $.input_declaration),
+
+    input_declaration: ($) =>
+      seq(
+        "input",
+        choice($.flag_declaration, $.option_declaration, $.arg_declaration),
       ),
 
     // /// documentation comment lines
@@ -37,6 +38,18 @@ module.exports = grammar({
         field("argument_id", $.identifier),
         field("parameters", $.parameter_list),
         optional(field("requires", $.requires_clause)),
+      ),
+
+    // represents positional arguments without any form of identification
+    // via flag name or option name
+    // arg Something = Type
+    arg_declaration: ($) =>
+      seq(
+        "arg",
+        field("argument_id", $.identifier),
+        field("pos_parameter", $.pos_parameter),
+        "=",
+        field("type", $.optional_type_name),
       ),
 
     // type PowerOfTwoSize {
@@ -100,6 +113,9 @@ module.exports = grammar({
         "=",
         field("value", $.expression),
       ),
+
+    // <1>
+    pos_parameter: ($) => seq("<", field("position", $.int_literal), ">"),
 
     // <"a", "all"> or <None, "author"> or <"f", None>
     parameter_list: ($) =>
