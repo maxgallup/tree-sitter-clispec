@@ -370,6 +370,10 @@
       "required": true,
       "types": [
         {
+          "type": "literal_union_type",
+          "named": true
+        },
+        {
           "type": "type_field_declaration",
           "named": true
         },

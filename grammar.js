@@ -60,7 +60,11 @@ module.exports = grammar({
       ),
 
     type_data_declaration: ($) =>
-      choice($.type_field_declaration, $.variant_field_declaration),
+      choice(
+        $.type_field_declaration,
+        $.variant_field_declaration,
+        $.literal_union_type,
+      ),
 
     // type Example { hello: Type, }
     //                ^^^^^^^^^^^

@@ -47,3 +47,19 @@ type MyType {
     (type_data_declaration
         (variant_field_declaration
         variant_id: (identifier)))))
+
+================================================================================
+Basic Enum Type with a field
+================================================================================
+type MyType {
+    "asdf" | "asdf"
+}
+--------------------------------------------------------------------------------
+(source_file
+    (type_declaration
+    type_id: (identifier)
+    (type_data_declaration
+        (literal_union_type
+        (string_literal_union_type
+            (string_literal)
+            (string_literal))))))

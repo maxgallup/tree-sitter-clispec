@@ -163,6 +163,10 @@
         {
           "type": "SYMBOL",
           "name": "variant_field_declaration"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "literal_union_type"
         }
       ]
     },
