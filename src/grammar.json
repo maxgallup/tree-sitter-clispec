@@ -208,8 +208,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "open_bracket"
+          "type": "STRING",
+          "value": "where"
         },
         {
           "type": "REPEAT",
@@ -217,10 +217,6 @@
             "type": "SYMBOL",
             "name": "_constraint_declaration"
           }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "closed_bracket"
         }
       ]
     },
@@ -576,6 +572,18 @@
         {
           "type": "SYMBOL",
           "name": "_type_expression"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "constraint_block"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -639,6 +647,18 @@
         {
           "type": "SYMBOL",
           "name": "_type_expression"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "constraint_block"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -709,7 +729,65 @@
         },
         {
           "type": "SYMBOL",
-          "name": "string_literal"
+          "name": "cmd_unit"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "constraint_block"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "declaration_block"
+        }
+      ]
+    },
+    "cmd_unit": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "named_identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "open_paren"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "string_literal"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "comma"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "string_literal"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "closed_paren"
         }
       ]
     }

@@ -74,6 +74,10 @@
           "named": true
         },
         {
+          "type": "constraint_block",
+          "named": true
+        },
+        {
           "type": "fat_arrow",
           "named": true
         },
@@ -149,7 +153,46 @@
       "required": true,
       "types": [
         {
+          "type": "cmd_unit",
+          "named": true
+        },
+        {
+          "type": "constraint_block",
+          "named": true
+        },
+        {
+          "type": "declaration_block",
+          "named": true
+        },
+        {
           "type": "keyword_cmd",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cmd_unit",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "closed_paren",
+          "named": true
+        },
+        {
+          "type": "comma",
+          "named": true
+        },
+        {
+          "type": "named_identifier",
+          "named": true
+        },
+        {
+          "type": "open_paren",
           "named": true
         },
         {
@@ -165,12 +208,8 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "closed_bracket",
-          "named": true
-        },
         {
           "type": "effects_clause",
           "named": true
@@ -180,11 +219,50 @@
           "named": true
         },
         {
+          "type": "requires_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "declaration_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arg_declaration",
+          "named": true
+        },
+        {
+          "type": "closed_bracket",
+          "named": true
+        },
+        {
+          "type": "cmd_declaration",
+          "named": true
+        },
+        {
+          "type": "doc_comment",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
           "type": "open_bracket",
           "named": true
         },
         {
-          "type": "requires_clause",
+          "type": "opt_declaration",
+          "named": true
+        },
+        {
+          "type": "type_declaration",
           "named": true
         }
       ]
@@ -356,6 +434,10 @@
       "types": [
         {
           "type": "anonymous_enum_expression",
+          "named": true
+        },
+        {
+          "type": "constraint_block",
           "named": true
         },
         {
@@ -667,5 +749,9 @@
   {
     "type": "string_literal",
     "named": true
+  },
+  {
+    "type": "where",
+    "named": false
   }
 ]

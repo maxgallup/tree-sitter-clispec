@@ -61,8 +61,7 @@ export default grammar({
     _constraint_declaration: ($) =>
       seq(choice($.requires_clause, $.excludes_clause, $.effects_clause)),
 
-    constraint_block: ($) =>
-      seq($.open_bracket, repeat($._constraint_declaration), $.closed_bracket),
+    constraint_block: ($) => seq("where", repeat($._constraint_declaration)),
 
     // _metadata_declaration: ($) =>
     //   seq(
@@ -136,7 +135,13 @@ export default grammar({
       ),
 
     opt_declaration: ($) =>
-      seq($.keyword_opt, $.opt_unit, $.fat_arrow, $._type_expression),
+      seq(
+        $.keyword_opt,
+        $.opt_unit,
+        $.fat_arrow,
+        $._type_expression,
+        optional($.constraint_block),
+      ),
 
     opt_unit: ($) =>
       seq(
@@ -147,7 +152,13 @@ export default grammar({
       ),
 
     arg_declaration: ($) =>
-      seq($.keyword_arg, $.arg_unit, $.fat_arrow, $._type_expression),
+      seq(
+        $.keyword_arg,
+        $.arg_unit,
+        $.fat_arrow,
+        $._type_expression,
+        optional($.constraint_block),
+      ),
 
     arg_unit: ($) =>
       seq(
@@ -161,6 +172,20 @@ export default grammar({
         $.closed_paren,
       ),
 
-    cmd_declaration: ($) => seq($.keyword_cmd, $.string_literal),
+    cmd_declaration: ($) =>
+      seq(
+        $.keyword_cmd,
+        $.cmd_unit,
+        optional($.constraint_block),
+        $.declaration_block,
+      ),
+
+    cmd_unit: ($) =>
+      seq(
+        $.named_identifier,
+        $.open_paren,
+        seq($.string_literal, repeat(seq($.comma, $.string_literal))),
+        $.closed_paren,
+      ),
   },
 });
