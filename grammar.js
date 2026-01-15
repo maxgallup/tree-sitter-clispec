@@ -10,35 +10,70 @@
 export default grammar({
   name: "clispec",
 
-  rules: {
-    source_file: ($) => repeat($.declaration),
+  extras: ($) => [/\s/],
 
+  word: ($) => $.identifier,
+
+  rules: {
+    source_file: ($) => seq(repeat($._declaration)),
+
+    _comment: ($) => choice($.doc_comment, $.line_comment),
     doc_comment: ($) => token(seq("///", /.*/)),
     line_comment: ($) => token(seq("//", /.*/)),
 
-    declaration: ($) =>
-      choice(
-        $.type_declaration,
-        $.opt_declaration,
-        $.arg_declaration,
-        $.cmd_declaration,
-        $.metadata_declaration,
-        $.doc_comment,
-        $.line_comment,
+    identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
+
+    keyword_type: ($) => "type",
+    keyword_opt: ($) => "opt",
+    keyword_arg: ($) => "arg",
+    keyword_cmd: ($) => "cmd",
+    keyword_requires: ($) => "requires",
+    keyword_excludes: ($) => "excludes",
+    keyword_effects: ($) => "effects",
+
+    operator_and: ($) => "&",
+
+    open_paren: ($) => "(",
+    closed_paren: ($) => ")",
+    open_bracket: ($) => "{",
+    closed_bracket: ($) => "}",
+    open_chevron: ($) => "<",
+    closed_chevron: ($) => ">",
+
+    pipe: ($) => "|",
+    comma: ($) => ",",
+    range: ($) => "..",
+
+    _declaration: ($) =>
+      seq(
+        choice(
+          $.type_declaration,
+          $.opt_declaration,
+          $.arg_declaration,
+          $.cmd_declaration,
+          $._comment,
+        ),
       ),
 
-    metadata_declaration: ($) =>
-      seq(
-        "meta",
-        "{",
-        "\n",
-        seq("name:", field("name", $.string_literal), "\n"),
-        seq("description:", field("description", $.string_literal), "\n"),
-        seq("version:", field("version", $.string_literal), "\n"),
-        repeat($.declaration),
-        "}",
-        "\n",
-      ),
+    declaration_block: ($) =>
+      seq($.open_bracket, repeat($._declaration), $.closed_bracket),
+
+    _constraint_declaration: ($) =>
+      seq(choice($.requires_clause, $.excludes_clause, $.effects_clause)),
+
+    constraint_block: ($) =>
+      seq($.open_bracket, repeat($._constraint_declaration), $.closed_bracket),
+
+    // _metadata_declaration: ($) =>
+    //   seq(
+    //     "cli",
+    //     "{",
+
+    //     seq("name:", field("name", $.string_literal)),
+    //     seq("version:", field("version", $.string_literal)),
+    //     optional(seq("constraints:", field("constraints", $.constraint_block))),
+    //     "}",
+    //   ),
 
     named_identifier: ($) => token(/[A-Z][a-zA-Z0-9_]*/),
 
@@ -46,62 +81,86 @@ export default grammar({
     float_literal: ($) => token(/-?\d+\.\d+/),
     string_literal: ($) => token(/\"(?:[^\"\\]|\\.)*\"/),
     bool_literal: ($) => token(choice("true", "false")),
+    fat_arrow: ($) => "=>",
 
-    type_expression: ($) =>
-      field(
-        "expression",
-        choice($.named_reference, $.anonymous_enum_expression, $.nested_type),
+    _type_expression: ($) =>
+      choice($.named_identifier, $.anonymous_enum_expression, $.nested_type),
+
+    nested_type: ($) =>
+      seq(
+        field("outer", $.named_identifier),
+        $.open_chevron,
+        field("inner", $._type_expression),
+        $.closed_chevron,
       ),
-    nested_type: ($) => seq($.named_reference, "<", $.type_expression, ">"),
-
-    named_reference: ($) => field("id", $.named_identifier),
 
     anonymous_enum_expression: ($) =>
       choice($.integer_enum, $.float_enum, $.string_enum),
 
-    integer_enum: ($) => seq($.int_literal, repeat(seq("|", $.int_literal))),
+    integer_enum: ($) => seq($.int_literal, repeat(seq($.pipe, $.int_literal))),
 
-    float_enum: ($) => seq($.float_literal, repeat(seq("|", $.float_literal))),
+    float_enum: ($) =>
+      seq($.float_literal, repeat(seq($.pipe, $.float_literal))),
 
     string_enum: ($) =>
-      seq($.string_literal, repeat(seq("|", $.string_literal))),
+      seq($.string_literal, repeat(seq($.pipe, $.string_literal))),
 
     type_declaration: ($) =>
-      seq("type", $.named_reference, "=", $.type_expression, "\n"),
+      seq(
+        $.keyword_type,
+        $.named_identifier,
+        $.fat_arrow,
+        $._type_expression,
+        optional($.constraint_block),
+      ),
 
-    requires_declaration: ($) => seq("requires:", $.type_expression),
+    requires_clause: ($) => seq($.keyword_requires, $._boolean_expression),
+    excludes_clause: ($) => seq($.keyword_excludes, $._boolean_expression),
+    effects_clause: ($) => seq($.keyword_effects, $._boolean_expression),
 
-    excludes_declaration: ($) => seq("excludes:", $.type_expression),
+    and_expression: ($) =>
+      prec.left(
+        2,
+        seq($._boolean_expression, $.operator_and, $._boolean_expression),
+      ),
+
+    or_expression: ($) =>
+      prec.left(1, seq($._boolean_expression, $.pipe, $._boolean_expression)),
+
+    _boolean_expression: ($) =>
+      choice(
+        seq($.open_paren, $._boolean_expression, $.closed_paren),
+        $.named_identifier,
+        $.and_expression,
+        $.or_expression,
+      ),
 
     opt_declaration: ($) =>
+      seq($.keyword_opt, $.opt_unit, $.fat_arrow, $._type_expression),
+
+    opt_unit: ($) =>
       seq(
-        "opt",
-        $.named_reference,
-        "(",
-        seq($.string_literal, repeat(seq(",", $.string_literal))),
-        ")",
-        "=",
-        $.type_expression,
-        "\n",
+        $.named_identifier,
+        $.open_paren,
+        seq($.string_literal, repeat(seq($.comma, $.string_literal))),
+        $.closed_paren,
       ),
 
     arg_declaration: ($) =>
+      seq($.keyword_arg, $.arg_unit, $.fat_arrow, $._type_expression),
+
+    arg_unit: ($) =>
       seq(
-        "arg",
-        $.named_reference,
-        "(",
+        $.named_identifier,
+        $.open_paren,
         seq(
           optional(field("start", $.int_literal)),
-          "..",
+          $.range,
           optional(field("end", $.int_literal)),
         ),
-        ")",
-        "=",
-        $.type_expression,
-        "\n",
+        $.closed_paren,
       ),
 
-    cmd_declaration: ($) =>
-      seq("cmd", $.string_literal, "{", "\n", repeat($.declaration), "}", "\n"),
+    cmd_declaration: ($) => seq($.keyword_cmd, $.string_literal),
   },
 });
