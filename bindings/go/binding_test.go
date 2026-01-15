@@ -10,6 +10,6 @@ import (
 func TestCanLoadGrammar(t *testing.T) {
 	language := tree_sitter.NewLanguage(tree_sitter_clispec.Language())
 	if language == nil {
-		t.Errorf("Error loading CliSpec grammar")
+		t.Errorf("Error loading Clispec grammar")
 	}
 }

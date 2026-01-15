@@ -9,4 +9,4 @@ class TestLanguage(TestCase):
         try:
             Parser(Language(tree_sitter_clispec.language()))
         except Exception:
-            self.fail("Error loading CliSpec grammar")
+            self.fail("Error loading Clispec grammar")
