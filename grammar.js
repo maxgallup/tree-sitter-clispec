@@ -66,7 +66,7 @@ export default grammar({
     constraint_block: ($) =>
       seq($.open_square, repeat($._constraint_declaration), $.closed_square),
 
-    named_identifier: ($) => token(/[A-Z][a-zA-Z0-9_]*/),
+    named_identifier: ($) => token(/[a-zA-Z][a-zA-Z0-9_]*/),
 
     int_literal: ($) => token(/-?\d+/),
     float_literal: ($) => token(/-?\d+\.\d+/),
