@@ -15,7 +15,7 @@ export default grammar({
   word: ($) => $.identifier,
 
   rules: {
-    source_file: ($) => seq(repeat($._declaration)),
+    source_file: ($) => seq($._metadata_declaration, repeat($._declaration)),
 
     _comment: ($) => choice($.doc_comment, $.line_comment),
     doc_comment: ($) => token(seq("///", /.*/)),
@@ -37,6 +37,8 @@ export default grammar({
     closed_paren: ($) => ")",
     open_bracket: ($) => "{",
     closed_bracket: ($) => "}",
+    open_square: ($) => "[",
+    closed_square: ($) => "]",
     open_chevron: ($) => "<",
     closed_chevron: ($) => ">",
 
@@ -61,20 +63,19 @@ export default grammar({
     _constraint_declaration: ($) =>
       seq(choice($.requires_clause, $.excludes_clause, $.effects_clause)),
 
-    constraint_block: ($) => seq("where", repeat($._constraint_declaration)),
+    constraint_block: ($) =>
+      seq($.open_square, repeat($._constraint_declaration), $.closed_square),
 
-    // _metadata_declaration: ($) =>
-    //   seq(
-    //     "cli",
-    //     "{",
+    _metadata_declaration: ($) =>
+      seq(
+        "meta",
+        $.open_bracket,
+        seq("name:", field("name", $.string_literal)),
+        seq("version:", field("version", $.string_literal)),
+        $.closed_bracket,
+      ),
 
-    //     seq("name:", field("name", $.string_literal)),
-    //     seq("version:", field("version", $.string_literal)),
-    //     optional(seq("constraints:", field("constraints", $.constraint_block))),
-    //     "}",
-    //   ),
-
-    named_identifier: ($) => token(/[A-Z][a-zA-Z0-9_]*/),
+    named_identifier: ($) => token(/[a-zA-Z][a-zA-Z0-9_]*/),
 
     int_literal: ($) => token(/-?\d+/),
     float_literal: ($) => token(/-?\d+\.\d+/),

@@ -208,14 +208,22 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "closed_square",
+          "named": true
+        },
         {
           "type": "effects_clause",
           "named": true
         },
         {
           "type": "excludes_clause",
+          "named": true
+        },
+        {
+          "type": "open_square",
           "named": true
         },
         {
@@ -568,13 +576,38 @@
     "type": "source_file",
     "named": true,
     "root": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      },
+      "version": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "arg_declaration",
+          "named": true
+        },
+        {
+          "type": "closed_bracket",
           "named": true
         },
         {
@@ -587,6 +620,10 @@
         },
         {
           "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "open_bracket",
           "named": true
         },
         {
@@ -667,6 +704,10 @@
     "named": true
   },
   {
+    "type": "closed_square",
+    "named": true
+  },
+  {
     "type": "comma",
     "named": true
   },
@@ -719,6 +760,14 @@
     "named": true
   },
   {
+    "type": "meta",
+    "named": false
+  },
+  {
+    "type": "name:",
+    "named": false
+  },
+  {
     "type": "named_identifier",
     "named": true
   },
@@ -732,6 +781,10 @@
   },
   {
     "type": "open_paren",
+    "named": true
+  },
+  {
+    "type": "open_square",
     "named": true
   },
   {
@@ -751,7 +804,7 @@
     "named": true
   },
   {
-    "type": "where",
+    "type": "version:",
     "named": false
   }
 ]
