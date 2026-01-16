@@ -10,5 +10,5 @@ grammar:
     tree-sitter playground
 
 build:
-    @tree-sitter generate
-    @tree-sitter build
+    @tree-sitter build --wasm
+    @tree-sitter playground
