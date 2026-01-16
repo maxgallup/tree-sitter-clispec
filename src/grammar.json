@@ -112,6 +112,14 @@
       "type": "STRING",
       "value": "}"
     },
+    "open_square": {
+      "type": "STRING",
+      "value": "["
+    },
+    "closed_square": {
+      "type": "STRING",
+      "value": "]"
+    },
     "open_chevron": {
       "type": "STRING",
       "value": "<"
@@ -208,8 +216,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "where"
+          "type": "SYMBOL",
+          "name": "open_square"
         },
         {
           "type": "REPEAT",
@@ -217,6 +225,10 @@
             "type": "SYMBOL",
             "name": "_constraint_declaration"
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "closed_square"
         }
       ]
     },
@@ -744,8 +756,16 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "declaration_block"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "declaration_block"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

@@ -208,14 +208,22 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "closed_square",
+          "named": true
+        },
         {
           "type": "effects_clause",
           "named": true
         },
         {
           "type": "excludes_clause",
+          "named": true
+        },
+        {
+          "type": "open_square",
           "named": true
         },
         {
@@ -667,6 +675,10 @@
     "named": true
   },
   {
+    "type": "closed_square",
+    "named": true
+  },
+  {
     "type": "comma",
     "named": true
   },
@@ -735,6 +747,10 @@
     "named": true
   },
   {
+    "type": "open_square",
+    "named": true
+  },
+  {
     "type": "operator_and",
     "named": true
   },
@@ -749,9 +765,5 @@
   {
     "type": "string_literal",
     "named": true
-  },
-  {
-    "type": "where",
-    "named": false
   }
 ]

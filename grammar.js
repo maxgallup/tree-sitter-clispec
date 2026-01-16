@@ -37,6 +37,8 @@ export default grammar({
     closed_paren: ($) => ")",
     open_bracket: ($) => "{",
     closed_bracket: ($) => "}",
+    open_square: ($) => "[",
+    closed_square: ($) => "]",
     open_chevron: ($) => "<",
     closed_chevron: ($) => ">",
 
@@ -61,18 +63,8 @@ export default grammar({
     _constraint_declaration: ($) =>
       seq(choice($.requires_clause, $.excludes_clause, $.effects_clause)),
 
-    constraint_block: ($) => seq("where", repeat($._constraint_declaration)),
-
-    // _metadata_declaration: ($) =>
-    //   seq(
-    //     "cli",
-    //     "{",
-
-    //     seq("name:", field("name", $.string_literal)),
-    //     seq("version:", field("version", $.string_literal)),
-    //     optional(seq("constraints:", field("constraints", $.constraint_block))),
-    //     "}",
-    //   ),
+    constraint_block: ($) =>
+      seq($.open_square, repeat($._constraint_declaration), $.closed_square),
 
     named_identifier: ($) => token(/[A-Z][a-zA-Z0-9_]*/),
 
@@ -177,7 +169,7 @@ export default grammar({
         $.keyword_cmd,
         $.cmd_unit,
         optional($.constraint_block),
-        $.declaration_block,
+        optional($.declaration_block),
       ),
 
     cmd_unit: ($) =>
