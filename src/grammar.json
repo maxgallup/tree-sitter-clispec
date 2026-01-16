@@ -198,43 +198,6 @@
         }
       ]
     },
-    "BoolLiteral_True_unit": {
-      "type": "STRING",
-      "value": "true"
-    },
-    "BoolLiteral_True": {
-      "type": "FIELD",
-      "name": "unit",
-      "content": {
-        "type": "SYMBOL",
-        "name": "BoolLiteral_True_unit"
-      }
-    },
-    "BoolLiteral_False_unit": {
-      "type": "STRING",
-      "value": "false"
-    },
-    "BoolLiteral_False": {
-      "type": "FIELD",
-      "name": "unit",
-      "content": {
-        "type": "SYMBOL",
-        "name": "BoolLiteral_False_unit"
-      }
-    },
-    "BoolLiteral": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "BoolLiteral_True"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "BoolLiteral_False"
-        }
-      ]
-    },
     "TypeExpression_Named": {
       "type": "SEQ",
       "members": [

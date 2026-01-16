@@ -1,0 +1,57 @@
+cmd Main("rm") [
+    requires RemoveFiles
+] {
+    /// files to be removed
+    arg RemoveFiles(..) => List<Path> [
+    	requires FileExists
+        effects FileDeleted
+    ]
+
+    /// ignore nonexistent files and arguments, never prompt
+    opt Force("f", "force") => Bool
+
+    /// prompt before every removal
+    opt PromptEveryTime("i") => Bool
+
+    /// prompt once before removing more than three files, or when
+    /// removing recursively; less intrusive than -i, while still
+    /// giving protection against most mistakes
+    opt PromptOnce("I") => Bool
+
+    /// prompt according to WHEN: never, once (-I), or always (-i);
+    /// without WHEN, prompt always
+    opt Interactive("interactive") => "never" | "once" | "always"
+
+    /// when removing a hierarchy recursively, skip any directory
+    /// that is on a file system different from that of the
+    /// corresponding command line argument
+    opt OneFs("one-file-system") => Bool
+
+    /// do not treat '/' specially
+    opt NoPreserveRoot("no-preserve-root") => Bool
+
+    /// do not remove '/' (default); with 'all', reject any command
+    /// line argument on a separate device from its parent
+    opt NoPreserveRoot("preserve-root") => Option<"all">
+
+    /// remove directories and their contents recursively
+    opt Recursive("r", "R", "recursive") => Bool
+
+    /// remove empty directories
+    opt Dir("d", "dir") => Bool
+
+    /// explain what is being done
+    opt Verbose("v", "verbose") => Bool
+
+    /// explain what is being done
+    opt Help("help") => Bool [
+        excludes all
+    ]
+
+    /// output version information and exit
+    opt Version("version") => Bool [
+    	excludes all
+    ]
+
+
+}

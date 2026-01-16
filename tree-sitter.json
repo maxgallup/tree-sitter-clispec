@@ -6,9 +6,7 @@
       "camelcase": "Clispec",
       "title": "Clispec",
       "scope": "source.clispec",
-      "file-types": [
-        "clispec"
-      ],
+      "file-types": ["clispec", "csp"],
       "injection-regex": "^clispec$",
       "class-name": "TreeSitterClispec"
     }
