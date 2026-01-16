@@ -336,6 +336,43 @@
         }
       ]
     },
+    "AnonymousEnumExpression_Integer_0_vec_delimiter": {
+      "type": "STRING",
+      "value": "|"
+    },
+    "AnonymousEnumExpression_Integer_0_vec_contents": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "AnonymousEnumExpression_Integer_0_vec_element",
+          "content": {
+            "type": "SYMBOL",
+            "name": "IntLiteral"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "AnonymousEnumExpression_Integer_0_vec_delimiter"
+              },
+              {
+                "type": "FIELD",
+                "name": "AnonymousEnumExpression_Integer_0_vec_element",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "IntLiteral"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
     "AnonymousEnumExpression_Integer": {
       "type": "SEQ",
       "members": [
@@ -344,7 +381,44 @@
           "name": "0",
           "content": {
             "type": "SYMBOL",
-            "name": "IntegerEnum"
+            "name": "AnonymousEnumExpression_Integer_0_vec_contents"
+          }
+        }
+      ]
+    },
+    "AnonymousEnumExpression_Float_0_vec_delimiter": {
+      "type": "STRING",
+      "value": "|"
+    },
+    "AnonymousEnumExpression_Float_0_vec_contents": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "AnonymousEnumExpression_Float_0_vec_element",
+          "content": {
+            "type": "SYMBOL",
+            "name": "FloatLiteral"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "AnonymousEnumExpression_Float_0_vec_delimiter"
+              },
+              {
+                "type": "FIELD",
+                "name": "AnonymousEnumExpression_Float_0_vec_element",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "FloatLiteral"
+                }
+              }
+            ]
           }
         }
       ]
@@ -357,7 +431,44 @@
           "name": "0",
           "content": {
             "type": "SYMBOL",
-            "name": "FloatEnum"
+            "name": "AnonymousEnumExpression_Float_0_vec_contents"
+          }
+        }
+      ]
+    },
+    "AnonymousEnumExpression_String_0_vec_delimiter": {
+      "type": "STRING",
+      "value": "|"
+    },
+    "AnonymousEnumExpression_String_0_vec_contents": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "AnonymousEnumExpression_String_0_vec_element",
+          "content": {
+            "type": "SYMBOL",
+            "name": "StringLiteral"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "AnonymousEnumExpression_String_0_vec_delimiter"
+              },
+              {
+                "type": "FIELD",
+                "name": "AnonymousEnumExpression_String_0_vec_element",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "StringLiteral"
+                }
+              }
+            ]
           }
         }
       ]
@@ -370,7 +481,7 @@
           "name": "0",
           "content": {
             "type": "SYMBOL",
-            "name": "StringEnum"
+            "name": "AnonymousEnumExpression_String_0_vec_contents"
           }
         }
       ]
@@ -389,201 +500,6 @@
         {
           "type": "SYMBOL",
           "name": "AnonymousEnumExpression_String"
-        }
-      ]
-    },
-    "IntegerEnum_rest_vec_contents": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "FIELD",
-        "name": "IntegerEnum_rest_vec_element",
-        "content": {
-          "type": "SYMBOL",
-          "name": "IntegerEnumRest"
-        }
-      }
-    },
-    "IntegerEnum": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "first",
-          "content": {
-            "type": "SYMBOL",
-            "name": "IntLiteral"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "BLANK"
-            },
-            {
-              "type": "FIELD",
-              "name": "rest",
-              "content": {
-                "type": "SYMBOL",
-                "name": "IntegerEnum_rest_vec_contents"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "IntegerEnumRest__pipe": {
-      "type": "STRING",
-      "value": "|"
-    },
-    "IntegerEnumRest": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "_pipe",
-          "content": {
-            "type": "SYMBOL",
-            "name": "IntegerEnumRest__pipe"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "value",
-          "content": {
-            "type": "SYMBOL",
-            "name": "IntLiteral"
-          }
-        }
-      ]
-    },
-    "FloatEnum_rest_vec_contents": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "FIELD",
-        "name": "FloatEnum_rest_vec_element",
-        "content": {
-          "type": "SYMBOL",
-          "name": "FloatEnumRest"
-        }
-      }
-    },
-    "FloatEnum": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "first",
-          "content": {
-            "type": "SYMBOL",
-            "name": "FloatLiteral"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "BLANK"
-            },
-            {
-              "type": "FIELD",
-              "name": "rest",
-              "content": {
-                "type": "SYMBOL",
-                "name": "FloatEnum_rest_vec_contents"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "FloatEnumRest__pipe": {
-      "type": "STRING",
-      "value": "|"
-    },
-    "FloatEnumRest": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "_pipe",
-          "content": {
-            "type": "SYMBOL",
-            "name": "FloatEnumRest__pipe"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "value",
-          "content": {
-            "type": "SYMBOL",
-            "name": "FloatLiteral"
-          }
-        }
-      ]
-    },
-    "StringEnum_rest_vec_contents": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "FIELD",
-        "name": "StringEnum_rest_vec_element",
-        "content": {
-          "type": "SYMBOL",
-          "name": "StringEnumRest"
-        }
-      }
-    },
-    "StringEnum": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "first",
-          "content": {
-            "type": "SYMBOL",
-            "name": "StringLiteral"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "BLANK"
-            },
-            {
-              "type": "FIELD",
-              "name": "rest",
-              "content": {
-                "type": "SYMBOL",
-                "name": "StringEnum_rest_vec_contents"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "StringEnumRest__pipe": {
-      "type": "STRING",
-      "value": "|"
-    },
-    "StringEnumRest": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "_pipe",
-          "content": {
-            "type": "SYMBOL",
-            "name": "StringEnumRest__pipe"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "value",
-          "content": {
-            "type": "SYMBOL",
-            "name": "StringLiteral"
-          }
         }
       ]
     },
@@ -1014,31 +930,6 @@
         }
       ]
     },
-    "AdditionalStringArg__comma": {
-      "type": "STRING",
-      "value": ","
-    },
-    "AdditionalStringArg": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "_comma",
-          "content": {
-            "type": "SYMBOL",
-            "name": "AdditionalStringArg__comma"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "value",
-          "content": {
-            "type": "SYMBOL",
-            "name": "StringLiteral"
-          }
-        }
-      ]
-    },
     "ArgUnit__open_paren": {
       "type": "STRING",
       "value": "("
@@ -1124,16 +1015,42 @@
       "type": "STRING",
       "value": "("
     },
-    "CmdUnit_additional_commands_vec_contents": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "FIELD",
-        "name": "CmdUnit_additional_commands_vec_element",
-        "content": {
-          "type": "SYMBOL",
-          "name": "AdditionalStringArg"
+    "CmdUnit_commands_vec_delimiter": {
+      "type": "STRING",
+      "value": ","
+    },
+    "CmdUnit_commands_vec_contents": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "CmdUnit_commands_vec_element",
+          "content": {
+            "type": "SYMBOL",
+            "name": "StringLiteral"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "CmdUnit_commands_vec_delimiter"
+              },
+              {
+                "type": "FIELD",
+                "name": "CmdUnit_commands_vec_element",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "StringLiteral"
+                }
+              }
+            ]
+          }
         }
-      }
+      ]
     },
     "CmdUnit__close_paren": {
       "type": "STRING",
@@ -1160,27 +1077,11 @@
         },
         {
           "type": "FIELD",
-          "name": "first_command",
+          "name": "commands",
           "content": {
             "type": "SYMBOL",
-            "name": "StringLiteral"
+            "name": "CmdUnit_commands_vec_contents"
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "BLANK"
-            },
-            {
-              "type": "FIELD",
-              "name": "additional_commands",
-              "content": {
-                "type": "SYMBOL",
-                "name": "CmdUnit_additional_commands_vec_contents"
-              }
-            }
-          ]
         },
         {
           "type": "FIELD",
