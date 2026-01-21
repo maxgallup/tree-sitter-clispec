@@ -466,7 +466,7 @@
         }
       ]
     },
-    "BooleanExpression_Identifier": {
+    "BoolIdentExpression_Identifier": {
       "type": "SEQ",
       "members": [
         {
@@ -479,7 +479,7 @@
         }
       ]
     },
-    "BooleanExpression_Paren": {
+    "BoolIdentExpression_Paren": {
       "type": "SEQ",
       "members": [
         {
@@ -492,11 +492,11 @@
         }
       ]
     },
-    "BooleanExpression_And_1": {
+    "BoolIdentExpression_And_1": {
       "type": "STRING",
       "value": "&"
     },
-    "BooleanExpression_And": {
+    "BoolIdentExpression_And": {
       "type": "PREC_LEFT",
       "value": 2,
       "content": {
@@ -507,7 +507,7 @@
             "name": "0",
             "content": {
               "type": "SYMBOL",
-              "name": "BooleanExpression"
+              "name": "BoolIdentExpression"
             }
           },
           {
@@ -515,7 +515,7 @@
             "name": "1",
             "content": {
               "type": "SYMBOL",
-              "name": "BooleanExpression_And_1"
+              "name": "BoolIdentExpression_And_1"
             }
           },
           {
@@ -523,17 +523,17 @@
             "name": "2",
             "content": {
               "type": "SYMBOL",
-              "name": "BooleanExpression"
+              "name": "BoolIdentExpression"
             }
           }
         ]
       }
     },
-    "BooleanExpression_Or_1": {
+    "BoolIdentExpression_Or_1": {
       "type": "STRING",
       "value": "|"
     },
-    "BooleanExpression_Or": {
+    "BoolIdentExpression_Or": {
       "type": "PREC_LEFT",
       "value": 1,
       "content": {
@@ -544,7 +544,7 @@
             "name": "0",
             "content": {
               "type": "SYMBOL",
-              "name": "BooleanExpression"
+              "name": "BoolIdentExpression"
             }
           },
           {
@@ -552,7 +552,7 @@
             "name": "1",
             "content": {
               "type": "SYMBOL",
-              "name": "BooleanExpression_Or_1"
+              "name": "BoolIdentExpression_Or_1"
             }
           },
           {
@@ -560,30 +560,30 @@
             "name": "2",
             "content": {
               "type": "SYMBOL",
-              "name": "BooleanExpression"
+              "name": "BoolIdentExpression"
             }
           }
         ]
       }
     },
-    "BooleanExpression": {
+    "BoolIdentExpression": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "BooleanExpression_Identifier"
+          "name": "BoolIdentExpression_Identifier"
         },
         {
           "type": "SYMBOL",
-          "name": "BooleanExpression_Paren"
+          "name": "BoolIdentExpression_Paren"
         },
         {
           "type": "SYMBOL",
-          "name": "BooleanExpression_And"
+          "name": "BoolIdentExpression_And"
         },
         {
           "type": "SYMBOL",
-          "name": "BooleanExpression_Or"
+          "name": "BoolIdentExpression_Or"
         }
       ]
     },
@@ -611,7 +611,7 @@
           "name": "inner",
           "content": {
             "type": "SYMBOL",
-            "name": "BooleanExpression"
+            "name": "BoolIdentExpression"
           }
         },
         {
@@ -644,7 +644,7 @@
           "name": "condition",
           "content": {
             "type": "SYMBOL",
-            "name": "BooleanExpression"
+            "name": "BoolIdentExpression"
           }
         }
       ]
@@ -669,7 +669,7 @@
           "name": "condition",
           "content": {
             "type": "SYMBOL",
-            "name": "BooleanExpression"
+            "name": "BoolIdentExpression"
           }
         }
       ]
@@ -694,7 +694,32 @@
           "name": "condition",
           "content": {
             "type": "SYMBOL",
-            "name": "BooleanExpression"
+            "name": "BoolIdentExpression"
+          }
+        }
+      ]
+    },
+    "SubCommandsClause__keyword": {
+      "type": "STRING",
+      "value": "subcommands"
+    },
+    "SubCommandsClause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "_keyword",
+          "content": {
+            "type": "SYMBOL",
+            "name": "SubCommandsClause__keyword"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "BoolIdentExpression"
           }
         }
       ]
@@ -738,6 +763,19 @@
         }
       ]
     },
+    "ConstraintDeclaration_SubCommands": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "SubCommandsClause"
+          }
+        }
+      ]
+    },
     "ConstraintDeclaration": {
       "type": "CHOICE",
       "members": [
@@ -752,6 +790,10 @@
         {
           "type": "SYMBOL",
           "name": "ConstraintDeclaration_Effects"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ConstraintDeclaration_SubCommands"
         }
       ]
     },

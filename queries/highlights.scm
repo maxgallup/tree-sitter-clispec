@@ -35,6 +35,7 @@
 (RequiresClause__keyword) @keyword
 (ExcludesClause__keyword) @keyword
 (EffectsClause__keyword) @keyword
+(SubCommandsClause__keyword) @keyword
 
 ; ============================================================================
 ; Types
@@ -77,7 +78,7 @@
     (NamedIdentifier_name) @function))
 
 ; Boolean expression identifiers (references to options/args)
-(BooleanExpression_Identifier
+(BoolIdentExpression_Identifier
   (NamedIdentifier
     (NamedIdentifier_name) @variable))
 
@@ -89,8 +90,8 @@
 (OptDeclaration__fat_arrow) @operator
 (ArgDeclaration__fat_arrow) @operator
 
-(BooleanExpression_And_1) @operator
-(BooleanExpression_Or_1) @operator
+(BoolIdentExpression_And_1) @operator
+(BoolIdentExpression_Or_1) @operator
 
 (ArgUnit__range) @operator
 
