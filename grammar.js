@@ -15,9 +15,9 @@ export default grammar({
   word: ($) => $.identifier,
 
   rules: {
-    source_file: ($) => seq(repeat($._declaration)),
+    source_file: ($) => seq(repeat($.declaration)),
 
-    _comment: ($) => choice($.doc_comment, $.line_comment),
+    comment: ($) => choice($.doc_comment, $.line_comment),
     doc_comment: ($) => token(seq("///", /.*/)),
     line_comment: ($) => token(seq("//", /.*/)),
 
@@ -47,21 +47,21 @@ export default grammar({
     comma: ($) => ",",
     range: ($) => "..",
 
-    _declaration: ($) =>
+    declaration: ($) =>
       seq(
         choice(
           $.type_declaration,
           $.opt_declaration,
           $.arg_declaration,
           $.cmd_declaration,
-          $._comment,
+          $.comment,
         ),
       ),
 
     declaration_block: ($) =>
-      seq($.open_bracket, repeat($._declaration), $.closed_bracket),
+      seq($.open_bracket, repeat($.declaration), $.closed_bracket),
 
-    _constraint_declaration: ($) =>
+    constraint_declaration: ($) =>
       seq(
         choice(
           $.requires_clause,
@@ -72,7 +72,7 @@ export default grammar({
       ),
 
     constraint_block: ($) =>
-      seq($.open_square, repeat($._constraint_declaration), $.closed_square),
+      seq($.open_square, repeat($.constraint_declaration), $.closed_square),
 
     named_identifier: ($) => token(/[a-zA-Z][a-zA-Z0-9_]*/),
 
@@ -108,24 +108,23 @@ export default grammar({
         optional($.constraint_block),
       ),
 
-    requires_clause: ($) => seq($.keyword_requires, $._boolean_expression),
-    excludes_clause: ($) => seq($.keyword_excludes, $._boolean_expression),
-    effects_clause: ($) => seq($.keyword_effects, $._boolean_expression),
-    subcommands_clause: ($) =>
-      seq($.keyword_subcommands, $._boolean_expression),
+    requires_clause: ($) => seq($.keyword_requires, $.boolean_expression),
+    excludes_clause: ($) => seq($.keyword_excludes, $.boolean_expression),
+    effects_clause: ($) => seq($.keyword_effects, $.boolean_expression),
+    subcommands_clause: ($) => seq($.keyword_subcommands, $.boolean_expression),
 
     and_expression: ($) =>
       prec.left(
         2,
-        seq($._boolean_expression, $.operator_and, $._boolean_expression),
+        seq($.boolean_expression, $.operator_and, $.boolean_expression),
       ),
 
     or_expression: ($) =>
-      prec.left(1, seq($._boolean_expression, $.pipe, $._boolean_expression)),
+      prec.left(1, seq($.boolean_expression, $.pipe, $.boolean_expression)),
 
-    _boolean_expression: ($) =>
+    boolean_expression: ($) =>
       choice(
-        seq($.open_paren, $._boolean_expression, $.closed_paren),
+        seq($.open_paren, $.boolean_expression, $.closed_paren),
         $.named_identifier,
         $.and_expression,
         $.or_expression,
