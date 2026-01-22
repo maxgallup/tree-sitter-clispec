@@ -1,33 +1,20 @@
-; indents.scm for clispec grammar
+; Nodes that increase indent level
+[
+  (declaration_block)
+  (constraint_block)
+  (nested_type)
+] @indent
 
-; ============================================================================
-; Declaration Blocks (command bodies)
-; ============================================================================
+; Closing delimiters that decrease indent
+[
+  (closed_bracket)
+  (closed_square)
+  (closed_chevron)
+  (closed_paren)
+] @outdent
 
-(DeclarationBlock
-  (DeclarationBlock__open_bracket) @indent.begin
-  (DeclarationBlock__close_bracket) @indent.end @indent.branch)
-
-; ============================================================================
-; Constraint Blocks
-; ============================================================================
-
-(ConstraintBlock
-  (ConstraintBlock__open_bracket) @indent.begin
-  (ConstraintBlock__close_bracket) @indent.end @indent.branch)
-
-; ============================================================================
-; Nested Types (for multi-line generic types)
-; ============================================================================
-
-(NestedType
-  (NestedType__open_chevron) @indent.begin
-  (NestedType__close_chevron) @indent.end @indent.branch)
-
-; ============================================================================
-; Parenthesized Boolean Expressions
-; ============================================================================
-
-(ParenBooleanExpression
-  (ParenBooleanExpression__open_paren) @indent.begin
-  (ParenBooleanExpression__close_paren) @indent.end @indent.branch)
+; Branch nodes - closing brackets on their own line
+[
+  (closed_bracket)
+  (closed_square)
+] @branch

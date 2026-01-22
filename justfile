@@ -1,4 +1,11 @@
+_default:
+    watchexec --restart \
+        --watch grammar.js \
+        --clear \
+        -- just build
+
 build:
+    @tree-sitter generate
     @tree-sitter build --wasm
     @tree-sitter playground
 

@@ -1,133 +1,69 @@
-; highlights.scm for clispec grammar
-
-; ============================================================================
 ; Comments
-; ============================================================================
+(doc_comment) @comment.documentation
+(line_comment) @comment
 
-(DocComment
-  (DocComment_content) @comment.documentation)
-
-(LineComment
-  (LineComment_content) @comment)
-
-; ============================================================================
-; Literals
-; ============================================================================
-
-(StringLiteral
-  (StringLiteral_value) @string)
-
-(IntLiteral
-  (IntLiteral_value) @number)
-
-(FloatLiteral
-  (FloatLiteral_value) @number.float)
-
-; ============================================================================
 ; Keywords
-; ============================================================================
+(keyword_type) @keyword
+(keyword_opt) @keyword
+(keyword_arg) @keyword
+(keyword_cmd) @keyword
+(keyword_requires) @keyword
+(keyword_excludes) @keyword
+(keyword_effects) @keyword
+(keyword_subcommands) @keyword
 
-(TypeDeclaration__keyword) @keyword
-(OptDeclaration__keyword) @keyword
-(ArgDeclaration__keyword) @keyword
-(CmdDeclaration__keyword) @keyword
-
-(RequiresClause__keyword) @keyword
-(ExcludesClause__keyword) @keyword
-(EffectsClause__keyword) @keyword
-(SubCommandsClause__keyword) @keyword
-
-; ============================================================================
-; Types
-; ============================================================================
-
-; Type names in type expressions
-(TypeExpression_Named
-  (NamedIdentifier
-    (NamedIdentifier_name) @type))
-
-; Outer type in nested types (e.g., List in List<String>)
-(NestedType
-  outer: (NamedIdentifier
-    (NamedIdentifier_name) @type))
-
-
-
-; Type declaration name
-(TypeDeclaration
-  name: (NamedIdentifier
-    (NamedIdentifier_name) @type.definition))
-
-; ============================================================================
-; Declarations - Names/Identifiers
-; ============================================================================
-
-; Option name
-(OptUnit
-  name: (NamedIdentifier
-    (NamedIdentifier_name) @variable.parameter))
-
-; Argument name
-(ArgUnit
-  name: (NamedIdentifier
-    (NamedIdentifier_name) @variable.parameter))
-
-; Command name
-(CmdUnit
-  name: (NamedIdentifier
-    (NamedIdentifier_name) @function))
-
-; Boolean expression identifiers (references to options/args)
-(BoolIdentExpression_Identifier
-  (NamedIdentifier
-    (NamedIdentifier_name) @variable))
-
-; ============================================================================
 ; Operators
-; ============================================================================
+(operator_and) @operator
+(pipe) @operator
+(fat_arrow) @operator
+(range) @operator
 
-(TypeDeclaration__fat_arrow) @operator
-(OptDeclaration__fat_arrow) @operator
-(ArgDeclaration__fat_arrow) @operator
-
-(BoolIdentExpression_And_1) @operator
-(BoolIdentExpression_Or_1) @operator
-
-(ArgUnit__range) @operator
-
-; Enum separators
-(AnonymousEnumExpression_Integer_0_vec_delimiter) @operator
-(AnonymousEnumExpression_Float_0_vec_delimiter) @operator
-(AnonymousEnumExpression_String_0_vec_delimiter) @operator
-
-; ============================================================================
 ; Punctuation - Brackets
-; ============================================================================
+(open_paren) @punctuation.bracket
+(closed_paren) @punctuation.bracket
+(open_bracket) @punctuation.bracket
+(closed_bracket) @punctuation.bracket
+(open_square) @punctuation.bracket
+(closed_square) @punctuation.bracket
+(open_chevron) @punctuation.bracket
+(closed_chevron) @punctuation.bracket
 
-(NestedType__open_chevron) @punctuation.bracket
-(NestedType__close_chevron) @punctuation.bracket
-
-(ParenBooleanExpression__open_paren) @punctuation.bracket
-(ParenBooleanExpression__close_paren) @punctuation.bracket
-
-(OptUnit__open_paren) @punctuation.bracket
-(OptUnit__close_paren) @punctuation.bracket
-
-(ArgUnit__open_paren) @punctuation.bracket
-(ArgUnit__close_paren) @punctuation.bracket
-
-(CmdUnit__open_paren) @punctuation.bracket
-(CmdUnit__close_paren) @punctuation.bracket
-
-(ConstraintBlock__open_bracket) @punctuation.bracket
-(ConstraintBlock__close_bracket) @punctuation.bracket
-
-(DeclarationBlock__open_bracket) @punctuation.bracket
-(DeclarationBlock__close_bracket) @punctuation.bracket
-
-; ============================================================================
 ; Punctuation - Delimiters
-; ============================================================================
+(comma) @punctuation.delimiter
 
-(OptUnit_names_vec_delimiter) @punctuation.delimiter
-(CmdUnit_commands_vec_delimiter) @punctuation.delimiter
+; Literals
+(int_literal) @number
+(float_literal) @number.float
+(string_literal) @string
+(bool_literal) @constant.builtin
+
+; Type declarations
+(type_declaration
+  (named_identifier) @type.definition)
+
+(nested_type
+  (named_identifier) @type)
+
+
+(type_expression
+  (named_identifier) @type)
+
+; Option declarations
+(opt_declaration
+  (opt_unit
+    (named_identifier) @variable.parameter))
+
+; Argument declarations
+(arg_declaration
+  (arg_unit
+    (named_identifier) @variable.parameter))
+
+; Command declarations
+(cmd_declaration
+  (cmd_unit
+    (named_identifier) @function))
+
+
+; Anonymous enum values in type expressions
+(anonymous_enum_expression
+  (literals) @constant)
