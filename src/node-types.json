@@ -8,11 +8,27 @@
       "required": true,
       "types": [
         {
-          "type": "boolean_expression",
+          "type": "and_expression",
+          "named": true
+        },
+        {
+          "type": "closed_paren",
+          "named": true
+        },
+        {
+          "type": "named_identifier",
+          "named": true
+        },
+        {
+          "type": "open_paren",
           "named": true
         },
         {
           "type": "operator_and",
+          "named": true
+        },
+        {
+          "type": "or_expression",
           "named": true
         }
       ]
@@ -46,6 +62,10 @@
       "required": true,
       "types": [
         {
+          "type": "anonymous_enum_expression",
+          "named": true
+        },
+        {
           "type": "arg_unit",
           "named": true
         },
@@ -62,7 +82,11 @@
           "named": true
         },
         {
-          "type": "type_expression",
+          "type": "named_identifier",
+          "named": true
+        },
+        {
+          "type": "nested_type",
           "named": true
         }
       ]
@@ -111,41 +135,6 @@
         },
         {
           "type": "range",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "boolean_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "and_expression",
-          "named": true
-        },
-        {
-          "type": "boolean_expression",
-          "named": true
-        },
-        {
-          "type": "closed_paren",
-          "named": true
-        },
-        {
-          "type": "named_identifier",
-          "named": true
-        },
-        {
-          "type": "open_paren",
-          "named": true
-        },
-        {
-          "type": "or_expression",
           "named": true
         }
       ]
@@ -210,25 +199,6 @@
     }
   },
   {
-    "type": "comment",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "doc_comment",
-          "named": true
-        },
-        {
-          "type": "line_comment",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "constraint_block",
     "named": true,
     "fields": {},
@@ -279,11 +249,11 @@
     }
   },
   {
-    "type": "declaration",
+    "type": "declaration_block",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -291,11 +261,23 @@
           "named": true
         },
         {
+          "type": "closed_bracket",
+          "named": true
+        },
+        {
           "type": "cmd_declaration",
           "named": true
         },
         {
-          "type": "comment",
+          "type": "doc_comment",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "open_bracket",
           "named": true
         },
         {
@@ -310,29 +292,6 @@
     }
   },
   {
-    "type": "declaration_block",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "closed_bracket",
-          "named": true
-        },
-        {
-          "type": "declaration",
-          "named": true
-        },
-        {
-          "type": "open_bracket",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "effects_clause",
     "named": true,
     "fields": {},
@@ -341,11 +300,27 @@
       "required": true,
       "types": [
         {
-          "type": "boolean_expression",
+          "type": "and_expression",
+          "named": true
+        },
+        {
+          "type": "closed_paren",
           "named": true
         },
         {
           "type": "keyword_effects",
+          "named": true
+        },
+        {
+          "type": "named_identifier",
+          "named": true
+        },
+        {
+          "type": "open_paren",
+          "named": true
+        },
+        {
+          "type": "or_expression",
           "named": true
         }
       ]
@@ -360,11 +335,27 @@
       "required": true,
       "types": [
         {
-          "type": "boolean_expression",
+          "type": "and_expression",
+          "named": true
+        },
+        {
+          "type": "closed_paren",
           "named": true
         },
         {
           "type": "keyword_excludes",
+          "named": true
+        },
+        {
+          "type": "named_identifier",
+          "named": true
+        },
+        {
+          "type": "open_paren",
+          "named": true
+        },
+        {
+          "type": "or_expression",
           "named": true
         }
       ]
@@ -406,7 +397,15 @@
         "required": true,
         "types": [
           {
-            "type": "type_expression",
+            "type": "anonymous_enum_expression",
+            "named": true
+          },
+          {
+            "type": "named_identifier",
+            "named": true
+          },
+          {
+            "type": "nested_type",
             "named": true
           }
         ]
@@ -446,6 +445,10 @@
       "required": true,
       "types": [
         {
+          "type": "anonymous_enum_expression",
+          "named": true
+        },
+        {
           "type": "constraint_block",
           "named": true
         },
@@ -458,11 +461,15 @@
           "named": true
         },
         {
-          "type": "opt_unit",
+          "type": "named_identifier",
           "named": true
         },
         {
-          "type": "type_expression",
+          "type": "nested_type",
+          "named": true
+        },
+        {
+          "type": "opt_unit",
           "named": true
         }
       ]
@@ -508,7 +515,23 @@
       "required": true,
       "types": [
         {
-          "type": "boolean_expression",
+          "type": "and_expression",
+          "named": true
+        },
+        {
+          "type": "closed_paren",
+          "named": true
+        },
+        {
+          "type": "named_identifier",
+          "named": true
+        },
+        {
+          "type": "open_paren",
+          "named": true
+        },
+        {
+          "type": "or_expression",
           "named": true
         },
         {
@@ -527,11 +550,27 @@
       "required": true,
       "types": [
         {
-          "type": "boolean_expression",
+          "type": "and_expression",
+          "named": true
+        },
+        {
+          "type": "closed_paren",
           "named": true
         },
         {
           "type": "keyword_requires",
+          "named": true
+        },
+        {
+          "type": "named_identifier",
+          "named": true
+        },
+        {
+          "type": "open_paren",
+          "named": true
+        },
+        {
+          "type": "or_expression",
           "named": true
         }
       ]
@@ -547,7 +586,27 @@
       "required": false,
       "types": [
         {
-          "type": "declaration",
+          "type": "arg_declaration",
+          "named": true
+        },
+        {
+          "type": "cmd_declaration",
+          "named": true
+        },
+        {
+          "type": "doc_comment",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "opt_declaration",
+          "named": true
+        },
+        {
+          "type": "type_declaration",
           "named": true
         }
       ]
@@ -562,11 +621,27 @@
       "required": true,
       "types": [
         {
-          "type": "boolean_expression",
+          "type": "and_expression",
+          "named": true
+        },
+        {
+          "type": "closed_paren",
           "named": true
         },
         {
           "type": "keyword_subcommands",
+          "named": true
+        },
+        {
+          "type": "named_identifier",
+          "named": true
+        },
+        {
+          "type": "open_paren",
+          "named": true
+        },
+        {
+          "type": "or_expression",
           "named": true
         }
       ]
@@ -581,6 +656,10 @@
       "required": true,
       "types": [
         {
+          "type": "anonymous_enum_expression",
+          "named": true
+        },
+        {
           "type": "constraint_block",
           "named": true
         },
@@ -590,29 +669,6 @@
         },
         {
           "type": "keyword_type",
-          "named": true
-        },
-        {
-          "type": "named_identifier",
-          "named": true
-        },
-        {
-          "type": "type_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "type_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "anonymous_enum_expression",
           "named": true
         },
         {

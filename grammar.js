@@ -15,9 +15,8 @@ export default grammar({
   word: ($) => $.identifier,
 
   rules: {
-    source_file: ($) => seq(repeat($.declaration)),
+    source_file: ($) => seq(repeat($._declaration)),
 
-    comment: ($) => choice($.doc_comment, $.line_comment),
     doc_comment: ($) => token(seq("///", /.*/)),
     line_comment: ($) => token(seq("//", /.*/)),
 
@@ -47,19 +46,20 @@ export default grammar({
     comma: ($) => ",",
     range: ($) => "..",
 
-    declaration: ($) =>
+    _declaration: ($) =>
       seq(
         choice(
           $.type_declaration,
           $.opt_declaration,
           $.arg_declaration,
           $.cmd_declaration,
-          $.comment,
+          $.doc_comment,
+          $.line_comment,
         ),
       ),
 
     declaration_block: ($) =>
-      seq($.open_bracket, repeat($.declaration), $.closed_bracket),
+      seq($.open_bracket, repeat($._declaration), $.closed_bracket),
 
     constraint_declaration: ($) =>
       seq(
@@ -82,14 +82,14 @@ export default grammar({
     bool_literal: ($) => token(choice("true", "false")),
     fat_arrow: ($) => "=>",
 
-    type_expression: ($) =>
+    _type_expression: ($) =>
       choice($.named_identifier, $.anonymous_enum_expression, $.nested_type),
 
     nested_type: ($) =>
       seq(
         field("outer", $.named_identifier),
         $.open_chevron,
-        field("inner", $.type_expression),
+        field("inner", $._type_expression),
         $.closed_chevron,
       ),
 
@@ -104,27 +104,28 @@ export default grammar({
         $.keyword_type,
         $.named_identifier,
         $.fat_arrow,
-        $.type_expression,
+        $._type_expression,
         optional($.constraint_block),
       ),
 
-    requires_clause: ($) => seq($.keyword_requires, $.boolean_expression),
-    excludes_clause: ($) => seq($.keyword_excludes, $.boolean_expression),
-    effects_clause: ($) => seq($.keyword_effects, $.boolean_expression),
-    subcommands_clause: ($) => seq($.keyword_subcommands, $.boolean_expression),
+    requires_clause: ($) => seq($.keyword_requires, $._boolean_expression),
+    excludes_clause: ($) => seq($.keyword_excludes, $._boolean_expression),
+    effects_clause: ($) => seq($.keyword_effects, $._boolean_expression),
+    subcommands_clause: ($) =>
+      seq($.keyword_subcommands, $._boolean_expression),
 
     and_expression: ($) =>
       prec.left(
         2,
-        seq($.boolean_expression, $.operator_and, $.boolean_expression),
+        seq($._boolean_expression, $.operator_and, $._boolean_expression),
       ),
 
     or_expression: ($) =>
-      prec.left(1, seq($.boolean_expression, $.pipe, $.boolean_expression)),
+      prec.left(1, seq($._boolean_expression, $.pipe, $._boolean_expression)),
 
-    boolean_expression: ($) =>
+    _boolean_expression: ($) =>
       choice(
-        seq($.open_paren, $.boolean_expression, $.closed_paren),
+        seq($.open_paren, $._boolean_expression, $.closed_paren),
         $.named_identifier,
         $.and_expression,
         $.or_expression,
@@ -135,7 +136,7 @@ export default grammar({
         $.keyword_opt,
         $.opt_unit,
         $.fat_arrow,
-        $.type_expression,
+        $._type_expression,
         optional($.constraint_block),
       ),
 
@@ -152,7 +153,7 @@ export default grammar({
         $.keyword_arg,
         $.arg_unit,
         $.fat_arrow,
-        $.type_expression,
+        $._type_expression,
         optional($.constraint_block),
       ),
 
