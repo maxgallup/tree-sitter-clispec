@@ -14,7 +14,7 @@
 
 ; Operators
 (operator_and) @operator
-(pipe) @operator
+(operator_or) @operator
 (fat_arrow) @operator
 (range) @operator
 

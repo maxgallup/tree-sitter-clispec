@@ -87,6 +87,10 @@
       "type": "STRING",
       "value": "&"
     },
+    "operator_or": {
+      "type": "STRING",
+      "value": "|"
+    },
     "open_paren": {
       "type": "STRING",
       "value": "("
@@ -118,10 +122,6 @@
     "closed_chevron": {
       "type": "STRING",
       "value": ">"
-    },
-    "pipe": {
-      "type": "STRING",
-      "value": "|"
     },
     "comma": {
       "type": "STRING",
@@ -185,7 +185,7 @@
         }
       ]
     },
-    "constraint_declaration": {
+    "_constraint_declaration": {
       "type": "SEQ",
       "members": [
         {
@@ -222,7 +222,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "constraint_declaration"
+            "name": "_constraint_declaration"
           }
         },
         {
@@ -360,7 +360,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "pipe"
+                "name": "operator_or"
               },
               {
                 "type": "SYMBOL",
@@ -489,7 +489,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "pipe"
+            "name": "operator_or"
           },
           {
             "type": "SYMBOL",

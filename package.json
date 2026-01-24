@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-clispec",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Specifications for command line options to provide type safe cli usage",
   "type": "module",
   "repository": {

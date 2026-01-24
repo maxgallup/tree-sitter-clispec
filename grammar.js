@@ -32,6 +32,7 @@ export default grammar({
     keyword_subcommands: ($) => "subcommands",
 
     operator_and: ($) => "&",
+    operator_or: ($) => "|",
 
     open_paren: ($) => "(",
     closed_paren: ($) => ")",
@@ -42,7 +43,6 @@ export default grammar({
     open_chevron: ($) => "<",
     closed_chevron: ($) => ">",
 
-    pipe: ($) => "|",
     comma: ($) => ",",
     range: ($) => "..",
 
@@ -61,7 +61,7 @@ export default grammar({
     declaration_block: ($) =>
       seq($.open_bracket, repeat($._declaration), $.closed_bracket),
 
-    constraint_declaration: ($) =>
+    _constraint_declaration: ($) =>
       seq(
         choice(
           $.requires_clause,
@@ -72,7 +72,7 @@ export default grammar({
       ),
 
     constraint_block: ($) =>
-      seq($.open_square, repeat($.constraint_declaration), $.closed_square),
+      seq($.open_square, repeat($._constraint_declaration), $.closed_square),
 
     named_identifier: ($) => token(/[a-zA-Z][a-zA-Z0-9_]*/),
 
@@ -97,7 +97,7 @@ export default grammar({
       choice($.int_literal, $.float_literal, $.string_literal, $.bool_literal),
 
     anonymous_enum_expression: ($) =>
-      seq($.literals, repeat(seq($.pipe, $.literals))),
+      seq($.literals, repeat(seq($.operator_or, $.literals))),
 
     type_declaration: ($) =>
       seq(
@@ -121,7 +121,10 @@ export default grammar({
       ),
 
     or_expression: ($) =>
-      prec.left(1, seq($._boolean_expression, $.pipe, $._boolean_expression)),
+      prec.left(
+        1,
+        seq($._boolean_expression, $.operator_or, $._boolean_expression),
+      ),
 
     _boolean_expression: ($) =>
       choice(

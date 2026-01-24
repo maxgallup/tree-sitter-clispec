@@ -47,7 +47,7 @@
           "named": true
         },
         {
-          "type": "pipe",
+          "type": "operator_or",
           "named": true
         }
       ]
@@ -211,30 +211,15 @@
           "named": true
         },
         {
-          "type": "constraint_declaration",
-          "named": true
-        },
-        {
-          "type": "open_square",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "constraint_declaration",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
           "type": "effects_clause",
           "named": true
         },
         {
           "type": "excludes_clause",
+          "named": true
+        },
+        {
+          "type": "open_square",
           "named": true
         },
         {
@@ -531,11 +516,11 @@
           "named": true
         },
         {
-          "type": "or_expression",
+          "type": "operator_or",
           "named": true
         },
         {
-          "type": "pipe",
+          "type": "or_expression",
           "named": true
         }
       ]
@@ -783,7 +768,7 @@
     "named": true
   },
   {
-    "type": "pipe",
+    "type": "operator_or",
     "named": true
   },
   {
