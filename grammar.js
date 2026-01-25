@@ -93,11 +93,14 @@ export default grammar({
         $.closed_chevron,
       ),
 
-    literals: ($) =>
+    _literals: ($) =>
       choice($.int_literal, $.float_literal, $.string_literal, $.bool_literal),
 
     anonymous_enum_expression: ($) =>
-      seq($.literals, repeat(seq($.operator_or, $.literals))),
+      seq($._literals, repeat(seq($.operator_or, $._literals))),
+
+    anonymous_list_expression: ($) =>
+      seq($._literals, repeat(seq($.comma, $._literals))),
 
     type_declaration: ($) =>
       seq(
@@ -150,7 +153,7 @@ export default grammar({
       seq(
         $.named_identifier,
         $.open_paren,
-        seq($.string_literal, repeat(seq($.comma, $.string_literal))),
+        $.anonymous_list_expression,
         $.closed_paren,
       ),
 
@@ -181,7 +184,7 @@ export default grammar({
       seq(
         $.named_identifier,
         $.open_paren,
-        seq($.string_literal, repeat(seq($.comma, $.string_literal))),
+        $.anonymous_list_expression,
         $.closed_paren,
       ),
   },

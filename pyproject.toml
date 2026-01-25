@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tree-sitter-clispec"
 description = "Specifications for command line options to provide type safe cli usage"
-version = "0.1.5"
+version = "0.1.6"
 keywords = ["incremental", "parsing", "tree-sitter", "clispec"]
 classifiers = [
   "Intended Audience :: Developers",

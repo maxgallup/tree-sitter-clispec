@@ -317,7 +317,7 @@
         }
       ]
     },
-    "literals": {
+    "_literals": {
       "type": "CHOICE",
       "members": [
         {
@@ -343,7 +343,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "literals"
+          "name": "_literals"
         },
         {
           "type": "REPEAT",
@@ -356,7 +356,32 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "literals"
+                "name": "_literals"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "anonymous_list_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_literals"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "comma"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_literals"
               }
             ]
           }
@@ -573,29 +598,8 @@
           "name": "open_paren"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "string_literal"
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "comma"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "string_literal"
-                  }
-                ]
-              }
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "anonymous_list_expression"
         },
         {
           "type": "SYMBOL",
@@ -739,29 +743,8 @@
           "name": "open_paren"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "string_literal"
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "comma"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "string_literal"
-                  }
-                ]
-              }
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "anonymous_list_expression"
         },
         {
           "type": "SYMBOL",
