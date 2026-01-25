@@ -82,14 +82,14 @@ export default grammar({
     bool_literal: ($) => token(choice("true", "false")),
     fat_arrow: ($) => "=>",
 
-    _type_expression: ($) =>
+    type_expression: ($) =>
       choice($.named_identifier, $.anonymous_enum_expression, $.nested_type),
 
     nested_type: ($) =>
       seq(
-        field("outer", $.named_identifier),
+        $.named_identifier,
         $.open_chevron,
-        field("inner", $._type_expression),
+        $.type_expression,
         $.closed_chevron,
       ),
 
@@ -104,7 +104,7 @@ export default grammar({
         $.keyword_type,
         $.named_identifier,
         $.fat_arrow,
-        $._type_expression,
+        $.type_expression,
         optional($.constraint_block),
       ),
 
@@ -142,7 +142,7 @@ export default grammar({
         $.keyword_opt,
         $.opt_unit,
         $.fat_arrow,
-        $._type_expression,
+        $.type_expression,
         optional($.constraint_block),
       ),
 
@@ -159,21 +159,15 @@ export default grammar({
         $.keyword_arg,
         $.arg_unit,
         $.fat_arrow,
-        $._type_expression,
+        $.type_expression,
         optional($.constraint_block),
       ),
 
     arg_unit: ($) =>
-      seq(
-        $.named_identifier,
-        $.open_paren,
-        seq(
-          optional(field("start", $.int_literal)),
-          $.range,
-          optional(field("end", $.int_literal)),
-        ),
-        $.closed_paren,
-      ),
+      seq($.named_identifier, $.open_paren, $.range_unit, $.closed_paren),
+
+    range_unit: ($) =>
+      seq(optional($.int_literal), $.range, optional($.int_literal)),
 
     cmd_declaration: ($) =>
       seq(
