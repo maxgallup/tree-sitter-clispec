@@ -9,7 +9,7 @@ build:
     @tree-sitter build --wasm
     @tree-sitter playground
 
-pubish:
+publish:
     @cargo publish
 
 bump:

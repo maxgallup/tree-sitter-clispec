@@ -126,9 +126,12 @@ export default grammar({
         seq($._boolean_expression, $.operator_or, $._boolean_expression),
       ),
 
+    paren_expression: ($) =>
+      seq($.open_paren, $._boolean_expression, $.closed_paren),
+
     _boolean_expression: ($) =>
       choice(
-        seq($.open_paren, $._boolean_expression, $.closed_paren),
+        $.paren_expression,
         $.named_identifier,
         $.and_expression,
         $.or_expression,

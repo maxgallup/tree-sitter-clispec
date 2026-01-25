@@ -1,6 +1,6 @@
 LANGUAGE_NAME := tree-sitter-clispec
 HOMEPAGE_URL := https://github.com/tree-sitter/tree-sitter-clispec
-VERSION := 0.1.3
+VERSION := 0.1.4
 
 # repository
 SRC_DIR := src

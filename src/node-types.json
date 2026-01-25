@@ -12,15 +12,7 @@
           "named": true
         },
         {
-          "type": "closed_paren",
-          "named": true
-        },
-        {
           "type": "named_identifier",
-          "named": true
-        },
-        {
-          "type": "open_paren",
           "named": true
         },
         {
@@ -29,6 +21,10 @@
         },
         {
           "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "paren_expression",
           "named": true
         }
       ]
@@ -289,10 +285,6 @@
           "named": true
         },
         {
-          "type": "closed_paren",
-          "named": true
-        },
-        {
           "type": "keyword_effects",
           "named": true
         },
@@ -301,11 +293,11 @@
           "named": true
         },
         {
-          "type": "open_paren",
+          "type": "or_expression",
           "named": true
         },
         {
-          "type": "or_expression",
+          "type": "paren_expression",
           "named": true
         }
       ]
@@ -324,10 +316,6 @@
           "named": true
         },
         {
-          "type": "closed_paren",
-          "named": true
-        },
-        {
           "type": "keyword_excludes",
           "named": true
         },
@@ -336,11 +324,11 @@
           "named": true
         },
         {
-          "type": "open_paren",
+          "type": "or_expression",
           "named": true
         },
         {
-          "type": "or_expression",
+          "type": "paren_expression",
           "named": true
         }
       ]
@@ -504,6 +492,37 @@
           "named": true
         },
         {
+          "type": "named_identifier",
+          "named": true
+        },
+        {
+          "type": "operator_or",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "paren_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "paren_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "and_expression",
+          "named": true
+        },
+        {
           "type": "closed_paren",
           "named": true
         },
@@ -516,11 +535,11 @@
           "named": true
         },
         {
-          "type": "operator_or",
+          "type": "or_expression",
           "named": true
         },
         {
-          "type": "or_expression",
+          "type": "paren_expression",
           "named": true
         }
       ]
@@ -539,10 +558,6 @@
           "named": true
         },
         {
-          "type": "closed_paren",
-          "named": true
-        },
-        {
           "type": "keyword_requires",
           "named": true
         },
@@ -551,11 +566,11 @@
           "named": true
         },
         {
-          "type": "open_paren",
+          "type": "or_expression",
           "named": true
         },
         {
-          "type": "or_expression",
+          "type": "paren_expression",
           "named": true
         }
       ]
@@ -610,10 +625,6 @@
           "named": true
         },
         {
-          "type": "closed_paren",
-          "named": true
-        },
-        {
           "type": "keyword_subcommands",
           "named": true
         },
@@ -622,11 +633,11 @@
           "named": true
         },
         {
-          "type": "open_paren",
+          "type": "or_expression",
           "named": true
         },
         {
-          "type": "or_expression",
+          "type": "paren_expression",
           "named": true
         }
       ]
