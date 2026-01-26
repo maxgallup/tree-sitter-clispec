@@ -48,6 +48,8 @@
 (type_expression
   (named_identifier) @type)
 
+(named_identifier) @type
+
 ; Option declarations
 (opt_declaration
   (opt_unit
@@ -62,8 +64,3 @@
 (cmd_declaration
   (cmd_unit
     (named_identifier) @function))
-
-
-; Anonymous enum values in type expressions
-(anonymous_enum_expression
-  (literals) @constant)
