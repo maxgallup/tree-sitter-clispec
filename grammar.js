@@ -8,184 +8,184 @@
 // @ts-check
 
 export default grammar({
-  name: "clispec",
+	name: "clispec",
 
-  extras: ($) => [/\s/],
+	extras: ($) => [/\s/],
 
-  word: ($) => $.identifier,
+	word: ($) => $.identifier,
 
-  rules: {
-    source_file: ($) => seq(repeat($._declaration)),
+	rules: {
+		source_file: ($) => seq(repeat($._declaration)),
 
-    doc_comment: ($) => token(seq("///", /.*/)),
-    line_comment: ($) => token(seq("//", /.*/)),
+		doc_comment: ($) => token(seq("///", /.*/)),
+		line_comment: ($) => token(seq("//", /.*/)),
 
-    identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
+		identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
-    keyword_type: ($) => "type",
-    keyword_opt: ($) => "opt",
-    keyword_arg: ($) => "arg",
-    keyword_cmd: ($) => "cmd",
-    keyword_requires: ($) => "requires",
-    keyword_excludes: ($) => "excludes",
-    keyword_effects: ($) => "effects",
-    keyword_subcommands: ($) => "subcommands",
+		keyword_type: ($) => "type",
+		keyword_opt: ($) => "opt",
+		keyword_arg: ($) => "arg",
+		keyword_cmd: ($) => "cmd",
+		keyword_requires: ($) => "requires",
+		keyword_excludes: ($) => "excludes",
+		keyword_effects: ($) => "effects",
+		keyword_subcommands: ($) => "subcommands",
 
-    operator_and: ($) => "&",
-    operator_or: ($) => "|",
+		operator_and: ($) => "&",
+		operator_or: ($) => "|",
 
-    open_paren: ($) => "(",
-    closed_paren: ($) => ")",
-    open_bracket: ($) => "{",
-    closed_bracket: ($) => "}",
-    open_square: ($) => "[",
-    closed_square: ($) => "]",
-    open_chevron: ($) => "<",
-    closed_chevron: ($) => ">",
+		open_paren: ($) => "(",
+		closed_paren: ($) => ")",
+		open_bracket: ($) => "{",
+		closed_bracket: ($) => "}",
+		open_square: ($) => "[",
+		closed_square: ($) => "]",
+		open_chevron: ($) => "<",
+		closed_chevron: ($) => ">",
 
-    comma: ($) => ",",
-    range: ($) => "..",
+		comma: ($) => ",",
+		range: ($) => "..",
 
-    _declaration: ($) =>
-      seq(
-        choice(
-          $.type_declaration,
-          $.opt_declaration,
-          $.arg_declaration,
-          $.cmd_declaration,
-          $.doc_comment,
-          $.line_comment,
-        ),
-      ),
+		_declaration: ($) =>
+			seq(
+				choice(
+					$.type_declaration,
+					$.opt_declaration,
+					$.arg_declaration,
+					$.cmd_declaration,
+					$.doc_comment,
+					$.line_comment,
+				),
+			),
 
-    declaration_block: ($) =>
-      seq($.open_bracket, repeat($._declaration), $.closed_bracket),
+		declaration_block: ($) =>
+			seq($.open_bracket, repeat($._declaration), $.closed_bracket),
 
-    _constraint_declaration: ($) =>
-      seq(
-        choice(
-          $.requires_clause,
-          $.excludes_clause,
-          $.effects_clause,
-          $.subcommands_clause,
-        ),
-      ),
+		_constraint_declaration: ($) =>
+			seq(
+				choice(
+					$.requires_clause,
+					$.excludes_clause,
+					$.effects_clause,
+					$.subcommands_clause,
+				),
+			),
 
-    constraint_block: ($) =>
-      seq($.open_square, repeat($._constraint_declaration), $.closed_square),
+		constraint_block: ($) =>
+			seq($.open_square, repeat($._constraint_declaration), $.closed_square),
 
-    named_identifier: ($) => token(/[a-zA-Z][a-zA-Z0-9_]*/),
+		named_identifier: ($) => token(/[a-zA-Z][a-zA-Z0-9_]*/),
 
-    int_literal: ($) => token(/-?\d+/),
-    float_literal: ($) => token(/-?\d+\.\d+/),
-    string_literal: ($) => token(/\"(?:[^\"\\]|\\.)*\"/),
-    bool_literal: ($) => token(choice("true", "false")),
-    fat_arrow: ($) => "=>",
+		int_literal: ($) => token(/-?\d+/),
+		float_literal: ($) => token(/-?\d+\.\d+/),
+		string_literal: ($) => token(/\"(?:[^\"\\]|\\.)*\"/),
+		bool_literal: ($) => token(choice("true", "false")),
+		fat_arrow: ($) => "=>",
 
-    type_expression: ($) =>
-      choice($.named_identifier, $.anonymous_enum_expression, $.nested_type),
+		type_expression: ($) =>
+			choice($.named_identifier, $.anonymous_enum_expression, $.nested_type),
 
-    nested_type: ($) =>
-      seq(
-        $.named_identifier,
-        $.open_chevron,
-        $.type_expression,
-        $.closed_chevron,
-      ),
+		nested_type: ($) =>
+			seq(
+				$.named_identifier,
+				$.open_chevron,
+				$.type_expression,
+				$.closed_chevron,
+			),
 
-    _literals: ($) =>
-      choice($.int_literal, $.float_literal, $.string_literal, $.bool_literal),
+		_literals: ($) =>
+			choice($.int_literal, $.float_literal, $.string_literal, $.bool_literal),
 
-    anonymous_enum_expression: ($) =>
-      seq($._literals, repeat(seq($.operator_or, $._literals))),
+		anonymous_enum_expression: ($) =>
+			seq($._literals, repeat(seq($.operator_or, $._literals))),
 
-    anonymous_list_expression: ($) =>
-      seq($._literals, repeat(seq($.comma, $._literals))),
+		anonymous_list_expression: ($) =>
+			seq($._literals, repeat(seq($.comma, $._literals))),
 
-    type_declaration: ($) =>
-      seq(
-        $.keyword_type,
-        $.named_identifier,
-        $.fat_arrow,
-        $.type_expression,
-        optional($.constraint_block),
-      ),
+		type_declaration: ($) =>
+			seq(
+				$.keyword_type,
+				$.named_identifier,
+				$.fat_arrow,
+				$.type_expression,
+				optional($.constraint_block),
+			),
 
-    requires_clause: ($) => seq($.keyword_requires, $._boolean_expression),
-    excludes_clause: ($) => seq($.keyword_excludes, $._boolean_expression),
-    effects_clause: ($) => seq($.keyword_effects, $._boolean_expression),
-    subcommands_clause: ($) =>
-      seq($.keyword_subcommands, $._boolean_expression),
+		requires_clause: ($) => seq($.keyword_requires, $._boolean_expression),
+		excludes_clause: ($) => seq($.keyword_excludes, $._boolean_expression),
+		effects_clause: ($) => seq($.keyword_effects, $._boolean_expression),
+		subcommands_clause: ($) =>
+			seq($.keyword_subcommands, $._boolean_expression),
 
-    and_expression: ($) =>
-      prec.left(
-        2,
-        seq($._boolean_expression, $.operator_and, $._boolean_expression),
-      ),
+		and_expression: ($) =>
+			prec.left(
+				2,
+				seq($._boolean_expression, $.operator_and, $._boolean_expression),
+			),
 
-    or_expression: ($) =>
-      prec.left(
-        1,
-        seq($._boolean_expression, $.operator_or, $._boolean_expression),
-      ),
+		or_expression: ($) =>
+			prec.left(
+				1,
+				seq($._boolean_expression, $.operator_or, $._boolean_expression),
+			),
 
-    paren_expression: ($) =>
-      seq($.open_paren, $._boolean_expression, $.closed_paren),
+		paren_expression: ($) =>
+			seq($.open_paren, $._boolean_expression, $.closed_paren),
 
-    _boolean_expression: ($) =>
-      choice(
-        $.paren_expression,
-        $.named_identifier,
-        $.and_expression,
-        $.or_expression,
-      ),
+		_boolean_expression: ($) =>
+			choice(
+				$.paren_expression,
+				$.named_identifier,
+				$.and_expression,
+				$.or_expression,
+			),
 
-    opt_declaration: ($) =>
-      seq(
-        $.keyword_opt,
-        $.opt_unit,
-        $.fat_arrow,
-        $.type_expression,
-        optional($.constraint_block),
-      ),
+		opt_declaration: ($) =>
+			seq(
+				$.keyword_opt,
+				$.opt_unit,
+				$.fat_arrow,
+				$.type_expression,
+				optional($.constraint_block),
+			),
 
-    opt_unit: ($) =>
-      seq(
-        $.named_identifier,
-        $.open_paren,
-        $.anonymous_list_expression,
-        $.closed_paren,
-      ),
+		opt_unit: ($) =>
+			seq(
+				$.named_identifier,
+				$.open_paren,
+				$.anonymous_list_expression,
+				$.closed_paren,
+			),
 
-    arg_declaration: ($) =>
-      seq(
-        $.keyword_arg,
-        $.arg_unit,
-        $.fat_arrow,
-        $.type_expression,
-        optional($.constraint_block),
-      ),
+		arg_declaration: ($) =>
+			seq(
+				$.keyword_arg,
+				$.arg_unit,
+				$.fat_arrow,
+				$.type_expression,
+				optional($.constraint_block),
+			),
 
-    arg_unit: ($) =>
-      seq($.named_identifier, $.open_paren, $.range_unit, $.closed_paren),
+		arg_unit: ($) =>
+			seq($.named_identifier, $.open_paren, $.range_unit, $.closed_paren),
 
-    range_unit: ($) =>
-      seq(optional($.int_literal), $.range, optional($.int_literal)),
+		range_unit: ($) =>
+			seq(optional($._literals), $.range, optional($._literals)),
 
-    cmd_declaration: ($) =>
-      seq(
-        $.keyword_cmd,
-        $.cmd_unit,
-        optional($.constraint_block),
-        optional($.declaration_block),
-      ),
+		cmd_declaration: ($) =>
+			seq(
+				$.keyword_cmd,
+				$.cmd_unit,
+				optional($.constraint_block),
+				optional($.declaration_block),
+			),
 
-    cmd_unit: ($) =>
-      seq(
-        $.named_identifier,
-        $.open_paren,
-        $.anonymous_list_expression,
-        $.closed_paren,
-      ),
-  },
+		cmd_unit: ($) =>
+			seq(
+				$.named_identifier,
+				$.open_paren,
+				$.anonymous_list_expression,
+				$.closed_paren,
+			),
+	},
 });

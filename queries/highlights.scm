@@ -39,7 +39,7 @@
 
 ; Type declarations
 (type_declaration
-  (named_identifier) @type.definition)
+  (named_identifier) @type)
 
 (nested_type
   (named_identifier) @type)
@@ -59,6 +59,9 @@
 (arg_declaration
   (arg_unit
     (named_identifier) @variable.parameter))
+
+(type_declaration
+    (named_identifier) @variable.parameter)
 
 ; Command declarations
 (cmd_declaration
