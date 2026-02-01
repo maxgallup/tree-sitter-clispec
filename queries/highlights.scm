@@ -11,6 +11,7 @@
 (keyword_excludes) @keyword
 (keyword_effects) @keyword
 (keyword_subcommands) @keyword
+(refinement_identifier) @keyword
 
 ; Operators
 (operator_and) @operator
