@@ -22,6 +22,8 @@ export default grammar({
 
     identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
+    refinement_identifier: ($) => /@[a-zA-Z_][a-zA-Z0-9_]*/,
+
     keyword_type: ($) => "type",
     keyword_opt: ($) => "opt",
     keyword_arg: ($) => "arg",
@@ -68,11 +70,20 @@ export default grammar({
           $.excludes_clause,
           $.effects_clause,
           $.subcommands_clause,
+          $.refinement_expression,
         ),
       ),
 
     constraint_block: ($) =>
       seq($.open_square, repeat($._constraint_declaration), $.closed_square),
+
+    refinement_expression: ($) =>
+      seq(
+        $.refinement_identifier,
+        $.open_paren,
+        $.anonymous_list_expression,
+        $.closed_paren,
+      ),
 
     named_identifier: ($) => token(/[a-zA-Z][a-zA-Z0-9_]*/),
 
