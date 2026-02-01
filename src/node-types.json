@@ -51,6 +51,10 @@
           "named": true
         },
         {
+          "type": "named_identifier",
+          "named": true
+        },
+        {
           "type": "operator_or",
           "named": true
         },
@@ -83,6 +87,10 @@
         },
         {
           "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "named_identifier",
           "named": true
         },
         {
@@ -513,6 +521,10 @@
         },
         {
           "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "named_identifier",
           "named": true
         },
         {

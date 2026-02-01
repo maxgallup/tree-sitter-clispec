@@ -283,8 +283,12 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "named_identifier"
+          "type": "PREC_LEFT",
+          "value": 1,
+          "content": {
+            "type": "SYMBOL",
+            "name": "named_identifier"
+          }
         },
         {
           "type": "SYMBOL",
@@ -335,6 +339,10 @@
         {
           "type": "SYMBOL",
           "name": "bool_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "named_identifier"
         }
       ]
     },
