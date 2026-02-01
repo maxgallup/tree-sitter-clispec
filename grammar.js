@@ -70,14 +70,14 @@ export default grammar({
           $.excludes_clause,
           $.effects_clause,
           $.subcommands_clause,
-          $.refinement_expression,
+          $.refinement_clause,
         ),
       ),
 
     constraint_block: ($) =>
       seq($.open_square, repeat($._constraint_declaration), $.closed_square),
 
-    refinement_expression: ($) =>
+    refinement_clause: ($) =>
       seq(
         $.refinement_identifier,
         $.open_paren,

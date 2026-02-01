@@ -237,7 +237,7 @@
           "named": true
         },
         {
-          "type": "refinement_expression",
+          "type": "refinement_clause",
           "named": true
         },
         {
@@ -543,7 +543,7 @@
     }
   },
   {
-    "type": "refinement_expression",
+    "type": "refinement_clause",
     "named": true,
     "fields": {},
     "children": {

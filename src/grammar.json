@@ -213,7 +213,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "refinement_expression"
+              "name": "refinement_clause"
             }
           ]
         }
@@ -239,7 +239,7 @@
         }
       ]
     },
-    "refinement_expression": {
+    "refinement_clause": {
       "type": "SEQ",
       "members": [
         {
